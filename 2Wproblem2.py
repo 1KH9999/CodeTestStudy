@@ -4,7 +4,7 @@ price=list(map(int,input().split()))
 def BNP(Money,price):
     stock=0
     for today in price:
-        if Money > today:
+        if Money >= today:
             stock += Money//today
             Money = Money%today
 

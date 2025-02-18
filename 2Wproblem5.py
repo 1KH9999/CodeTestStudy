@@ -30,15 +30,12 @@ comblist=people_comb(N)
 for comb in comblist:
     teampower=ability_people(comb,ability_graph)
     team_powerlist.append(teampower)
-print(team_powerlist)
 
 min_diff=float('inf')
-diff_list=[]
 M=len(team_powerlist)
 for i in range(M-1):
     diff=abs(team_powerlist[i]-team_powerlist[M-i-1])
-    diff_list.append(diff)
     if diff < min_diff:
         min_diff=diff
-print(diff_list)
+
 print(min_diff)

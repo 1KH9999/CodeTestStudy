@@ -5,44 +5,37 @@ for i in range(5):
 Numbers=[]
 for i in range(5):
     Numbers.extend(map(int, input().split()))
-count=0
+
 
 def Bingo(Bingoboard):
-    global count
+    count=0
     #가로줄 빙고
     for i in range(5):
-        rowcount=0
-        for j in range(5):
-            if Bingoboard[i][j]==0:
-                rowcount+=1
-        if rowcount==5:
-            count+=1
+        if all(Bingoboard[i][j] == 0 for j in range(5)):  
+            count += 1
     #세로줄 빙고
     for i in range(5):
-        columncount=0
-        for j in range(5):
-            if Bingoboard[j][i]==0:
-                columncount+=1
-        if columncount==5:
-            count+=1
+        if all(Bingoboard[j][i] == 0 for j in range(5)):  
+            count += 1
     #대각선 빙고
-    for i in range(5):
-        if Bingoboard[i][i]==0:
-            count+=1
-        elif Bingoboard[i][4-i]==0:
-            count+=1
-found=False
-for number in Numbers:
+    if all(Bingoboard[i][i] == 0 for i in range(5)):  
+        count+=1
+    if all(Bingoboard[i][4-i] == 0 for i in range(5)):  
+        count+=1     
+
+    return count
+
+found = False
+for a in range(len(Numbers)):
     for i in range(5):
         for j in range(5):
-            if Bingoboard[i][j]==number:
-                Bingoboard[i][j]=0
-            Bingo(Bingoboard)
-            if count==3:
-                find=(i)*5+j+1
-                found=True
-                break
-        if found:        
+            if Bingoboard[i][j] == Numbers[a]:
+                Bingoboard[i][j] = 0  # 숫자 찾으면 0으로 변경
+                if Bingo(Bingoboard) >= 3: 
+                    find = a+1
+                    found = True
+                    break
+        if found:
             break
     if found:
         break
