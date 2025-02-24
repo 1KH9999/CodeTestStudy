@@ -27,7 +27,7 @@ def bfs(N,K):
 
                     elif visited[next_pos] == visited[a]+1:
                         count[next_pos] +=count[a]
-
+        
 
     return visited[K],count[K]
 
